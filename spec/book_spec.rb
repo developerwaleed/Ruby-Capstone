@@ -14,5 +14,9 @@ describe Book do
         it 'Method can_be_archived? should return false' do
             expect(@good_book.can_be_archived?).to be false
         end
+
+        it 'Method can_be_archived? should return true' do
+            expect(@bad_book.can_be_archived?).to be true
+        end
     end
 end
