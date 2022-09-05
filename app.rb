@@ -63,12 +63,13 @@ class App
         end
         puts "\n"
         @labels.each do |label|
-            puts "ID : #{label.id} => #{label.title} label with color #{label.color}"
+            puts "[Id:#{label.id}] '#{label.title}' => #{label.color}"
         end
     end
 
     def save_all_json_data
         books = []
+        labels = []
         # Save books
         @books.each do |book|
             books.push({
@@ -78,12 +79,28 @@ class App
             })
         end
         save_json_data(books, 'books')
+
+        # Save labels
+        @labels.each do |label|
+            labels.push({
+                title: label.title,
+                color: label.color
+            })
+        end
+        save_json_data(labels, 'labels')
     end
 
     def load_all_json_data
+        # Load books
         books = load_json_data('books')
         books.each do |book|
             @books.push(Book.new(book['publish_date'], book['publisher'], book['cover_state']))
+        end
+
+        # Load labels
+        labels = load_json_data('labels')
+        labels.each do |label|
+            @labels.push(Label.new(label['title'], label['color']))
         end
     end
 end 
