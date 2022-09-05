@@ -1,5 +1,7 @@
 require './spec/helper_spec'
+require './json_data/preserve_data_module'
 class App
+    include Preserve_json_data
     def initialize
         @books = []
         @labels = []
@@ -34,8 +36,9 @@ class App
             message("No books in the catalog")
             return
         end
-        @books.each do |book|
-            puts "#{book.cover_state} book published by #{book.publisher} on #{book.publish_date}"
+        puts "\n"
+        @books.each_with_index do |book, i|
+            puts "#{i+1}) #{book.cover_state} book published by #{book.publisher} on #{book.publish_date}"
         end
     end
 
@@ -57,8 +60,24 @@ class App
             message("No Label in the catalog")
             return
         end
+        puts "\n"
         @labels.each do |label|
             puts "ID : #{label.id} => #{label.title} label with color #{label.color}"
         end
+    end
+
+    def save_all_json_data
+        books = []
+
+        # Save books
+        @books.each do |book|
+            books.push({
+                publish_date: book.publish_date,
+                publisher: book.publisher,
+                cover_state: book.cover_state
+            })
+        end
+        save_json_data(books, 'books')
+
     end
 end 

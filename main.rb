@@ -51,6 +51,7 @@ class Run
     when '10'
       puts 'Add a game'
     when '11'
+      app.save_all_json_data
       app.message('Thank you for consulting my catalog')
       exit
     else
