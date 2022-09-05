@@ -1,22 +1,20 @@
 class Item
-  attr_reader :id, :archived
-  attr_accessor :genre, :author, :source, :label, :publish_date
+  attr_accessor :publish_date
+  attr_reader :genre, :label, :author, :archived, :source
 
-  def intialized(genre, author, source, label, publish_date, archived)
-    @id = Random.rand(0..1000)
-    @genre = genre
-    @author = author
-    @source = source
-    @label = label
-    @publish_date = publish_date
-    @archived = archived
+  def initialize(date)
+    @id = Random.rand(1..1000)
+    @publish_date = Date.strptime(date, '%Y-%m-%d')
+    @archived = false
   end
 
-  def can_be_removed?
-    (Date.today.year - @publish_date.year).to_i > 10
+  def can_be_archived?
+    (Date.today.year - @publish_date.year) > 10
   end
 
   def move_to_archive
-    @archived = true if can_be_removed?
+    true if can_be_archived?
   end
+
+  private :can_be_archived?
 end
