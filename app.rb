@@ -21,7 +21,7 @@ class App
         puts "New Book added successfully"
     end
 
-    def list_book
+    def list_books
         @books.each do |book|
             puts "#{book.cover_state} book published by #{book.publisher} on #{book.publish_date}"
         end
@@ -38,5 +38,11 @@ class App
         label = Label.new(title, color)
         @labels.push(label)
         puts "New Label added successfully"
+    end
+
+    def list_labels
+        @labels.each do |label|
+            puts "ID : #{label.id} => #{label.title} label with color #{label.color}"
+        end
     end
 end 
