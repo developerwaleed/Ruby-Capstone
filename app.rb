@@ -5,6 +5,7 @@ class App
     def initialize
         @books = []
         @labels = []
+        load_all_json_data
     end
 
     def is_empty(array)
@@ -16,7 +17,7 @@ class App
     end
     
     def add_book
-        print "Publish date [YYYY/MM/DD] : "
+        print "Publish date [YYYY-MM-DD] : "
         publish_date = gets.chomp
 
         print "Book Publisher : "
@@ -68,7 +69,6 @@ class App
 
     def save_all_json_data
         books = []
-
         # Save books
         @books.each do |book|
             books.push({
@@ -78,6 +78,12 @@ class App
             })
         end
         save_json_data(books, 'books')
+    end
 
+    def load_all_json_data
+        books = load_json_data('books')
+        books.each do |book|
+            @books.push(Book.new(book['publish_date'], book['publisher'], book['cover_state']))
+        end
     end
 end 

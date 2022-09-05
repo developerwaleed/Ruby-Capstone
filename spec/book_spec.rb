@@ -2,8 +2,8 @@ require_relative 'helper_spec'
 
 describe Book do
     before :each do
-        @good_book = Book.new('2018/01/01', 'Chris Siku', 'good')
-        @bad_book = Book.new('2022/09/01', 'Harold Mudosa', 'bad')
+        @good_book = Book.new('2018-01-01', 'Chris Siku', 'good')
+        @bad_book = Book.new('2022-09-01', 'Harold Mudosa', 'bad')
     end
 
     context 'Test the Book\'s class instances' do
