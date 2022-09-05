@@ -8,6 +8,11 @@ class Item
     @archived = false
   end
 
+  def add_label(label)
+    @label = label
+    label.items.push(self) unless label.items.include?(self)
+  end
+
   def can_be_archived?
     (Date.today.year - @publish_date.year) > 10
   end
