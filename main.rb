@@ -1,7 +1,10 @@
+require_relative 'app'
+
 class Run
+  app = App.new
   puts 'Welcome to my Catalog of things'
-  puts "\n"
   def self.menu
+    puts "\n"
     puts 'Please select from the following options:'
     @options = {
       '1' => 'List all books',
@@ -12,8 +15,9 @@ class Run
       '6' => 'List all authors',
       '7' => 'Add a music album',
       '8' => 'Add a book',
-      '9' => 'Add a game',
-      '10' => 'Exit'
+      '9' => 'Add a label',
+      '10' => 'Add a game',
+      '11' => 'Exit'
     }
 
     @options.each do |key, value|
@@ -27,9 +31,9 @@ class Run
   loop do
     case menu
     when '1'
-      puts 'List all books'
+      app.list_books
     when '2'
-      puts 'List all labels'
+      app.list_labels
     when '3'
       puts 'List all music albums'
     when '4'
@@ -41,14 +45,16 @@ class Run
     when '7'
       puts 'Add a music album'
     when '8'
-      puts 'Add a book'
+      app.add_book
     when '9'
-      puts 'Add a game'
+      app.add_label
     when '10'
-      puts 'Thank you for consulting my catalog'
+      puts 'Add a game'
+    when '11'
+      app.message('Thank you for consulting my catalog')
       exit
     else
-      puts 'Please Enter a valid choice [1-10]'
+      app.message('Please Enter a valid choice [1-10]')
     end
   end
 end

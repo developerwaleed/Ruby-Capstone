@@ -1,12 +1,20 @@
-require_relative '../spec/spec_helper'
+require './spec/helper_spec'
 class App
     def initialize
         @books = []
         @labels = []
     end
+
+    def is_empty(array)
+        array.empty?
+    end
+
+    def message(text)
+        puts "\n#{text}\n\n"
+    end
     
     def add_book
-        print "Publish date [YYYY / MM / DD] : "
+        print "Publish date [YYYY/MM/DD] : "
         publish_date = gets.chomp
 
         print "Book Publisher : "
@@ -18,10 +26,14 @@ class App
 
         book = Book.new(publish_date, publisher, cover_state)
         @books.push(book)
-        puts "New Book added successfully"
+        message("New Book added successfully")
     end
 
     def list_books
+        if is_empty(@books)
+            message("No books in the catalog")
+            return
+        end
         @books.each do |book|
             puts "#{book.cover_state} book published by #{book.publisher} on #{book.publish_date}"
         end
@@ -37,10 +49,14 @@ class App
 
         label = Label.new(title, color)
         @labels.push(label)
-        puts "New Label added successfully"
+        message("New Label added successfully")
     end
 
     def list_labels
+        if is_empty(@labels)
+            message("No Label in the catalog")
+            return
+        end
         @labels.each do |label|
             puts "ID : #{label.id} => #{label.title} label with color #{label.color}"
         end
