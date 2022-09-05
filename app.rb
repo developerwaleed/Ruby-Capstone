@@ -20,4 +20,10 @@ class App
         @books.push(book)
         puts "New Book added successfully"
     end
+
+    def list_book
+        @books.each do |book|
+            puts "#{book.cover_state} book published by #{book.publisher} on #{book.publish_date}"
+        end
+    end
 end 
