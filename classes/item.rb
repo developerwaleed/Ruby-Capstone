@@ -1,6 +1,4 @@
-
 require 'date'
-
 class Item
   attr_accessor :publish_date
   attr_reader :genre, :label, :author, :archived, :source
@@ -9,6 +7,11 @@ class Item
     @id = Random.rand(1..1000)
     @publish_date = Date.strptime(date, '%Y-%m-%d')
     @archived = false
+  end
+
+  def add_label(label)
+    @label = label
+    label.items.push(self) unless label.items.include?(self)
   end
 
   def can_be_archived?
