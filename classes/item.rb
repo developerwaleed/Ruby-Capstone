@@ -11,6 +11,12 @@ class Item
     @archived = false
   end
 
+  def add_genre(genre)
+    @genre = genre.name
+    genre.item << self unless genre.items.include?(self)
+  end
+
+
   def can_be_archived?
     (Date.today.year - @publish_date.year) > 10
   end
