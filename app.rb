@@ -1,8 +1,11 @@
 require './spec/helper_spec'
 require './json_data/preserve_data_module'
+require './json_data/preserve_music_albums'
 
 class App
   include PreserveJsonData
+  include AlbumsPersistence
+  
   def initialize
     @books = []
     @labels = []
@@ -52,7 +55,6 @@ class App
       return
     end
     puts "\n"
-    puts @music_album.inspect
     @music_album.each_with_index do |album, i|
       puts "#{i + 1}) #{album.name} || published on #{album.publish_date} || is_on_spotify? #{album.on_spotify}"
     end
@@ -117,6 +119,7 @@ class App
                   })
     end
     save_json_data(labels, 'labels')
+    store_albums(@music_album)
   end
 
   def load_all_json_data
@@ -131,6 +134,7 @@ class App
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
+    @music_album = load_albums
   end
 end
 
