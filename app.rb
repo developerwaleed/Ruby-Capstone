@@ -42,6 +42,43 @@ class App
     end
   end
 
+  def add_game
+    print 'Publish date [YYYY-MM-DD] : '
+    publish_date = gets.chomp
+
+    print 'Is multiplayer game? [ yes, no ]: '
+    multiplayer = gets.chomp
+
+    case multiplayer
+      when 'yes' 
+        multiplayer_value = 'yes'
+      when 'no'
+        multiplayer_value = 'no'
+      else
+        puts 'yes or no'
+        multiplayer_value = gets.chomp
+    end
+
+    print 'Last played at[YYYY-MM-DD]: '
+    last_played_at = gets.chomp
+
+    game = Game.new(publish_date, multiplayer_value, last_played_at)
+    @games.push(game)
+    message('New Game added successfully')
+  end
+
+  def add_author
+    print 'Creator\'s first name: '
+    first_name = gets.chomp
+
+    print 'Creator\'s last name: '
+    last_name = gets.chomp
+
+    author = Author.new(first_name, last_name)
+    @authors.push(author)
+    message('New Game added successfully')
+  end
+
   def add_book
     print 'Publish date [YYYY-MM-DD] : '
     publish_date = gets.chomp
@@ -129,5 +166,3 @@ class App
     end
   end
 end
-
-

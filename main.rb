@@ -17,7 +17,8 @@ class Run
       '8' => 'Add a book',
       '9' => 'Add a label',
       '10' => 'Add a game',
-      '11' => 'Exit'
+      '11' => 'Add an author',
+      '12' => 'Exit'
     }
 
     @options.each do |key, value|
@@ -49,8 +50,10 @@ class Run
     when '9'
       app.add_label
     when '10'
-      puts 'Add a game'
+      app.add_game
     when '11'
+      app.add_author
+    when '12'
       app.save_all_json_data
       app.message('Thank you for consulting my catalog')
       exit
