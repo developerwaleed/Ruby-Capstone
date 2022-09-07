@@ -5,6 +5,8 @@ class App
   def initialize
     @books = []
     @labels = []
+    @games = []
+    @authors = []
     load_all_json_data
   end
 
@@ -14,6 +16,30 @@ class App
 
   def message(text)
     puts "\n#{text}\n\n"
+  end
+
+  def list_games
+    if is_empty(@games)
+      message('No game in the catalog')
+      return
+    end
+    puts "\n"
+    
+    @games.each do |game|
+      puts "publish date: #{game.publish_date}, multiplayer: #{game.multiplayer}, last_played_at: #{game.last_played_at}" 
+    end
+  end
+
+  def list_authors
+    if is_empty(@authors)
+      message('No author in the catalog')
+      return
+    end
+    puts "\n"
+
+    @authors.each_with_index do |author, i|
+      puts "#{i + 1 }) #{author.first_name} #{author.last_name}"
+    end
   end
 
   def add_book

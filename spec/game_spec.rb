@@ -19,5 +19,4 @@ describe Game do
       expect(@fifa.can_be_archived?).to eq(false)
     end
   end
-  
 end

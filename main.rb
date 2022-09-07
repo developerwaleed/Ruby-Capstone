@@ -39,9 +39,9 @@ class Run
     when '4'
       puts 'List all genres'
     when '5'
-      puts 'List of games'
+      app.list_games
     when '6'
-      puts 'List all authors'
+      app.list_authors
     when '7'
       puts 'Add a music album'
     when '8'
