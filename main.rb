@@ -37,7 +37,7 @@ class Run
     when '3'
       app.list_music_albums
     when '4'
-      puts 'List all genres'
+      app.list_genres
     when '5'
       puts 'List of games'
     when '6'

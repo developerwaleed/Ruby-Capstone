@@ -7,6 +7,7 @@ class App
     @books = []
     @labels = []
     @music_album = []
+    @genres = []
     load_all_json_data
   end
 
@@ -81,6 +82,17 @@ class App
     puts "\n"
     @labels.each do |label|
       puts "[Id:#{label.id}] '#{label.title}' => #{label.color}"
+    end
+  end
+
+  def list_genres
+    if is_empty(@genres)
+      message('No genre in the catalog')
+      return
+    end
+    puts "\n"
+    @genres.each do |genre|
+      puts "ID: #{genre.id} | Name: #{genre.name}"
     end
   end
 
