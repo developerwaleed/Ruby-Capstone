@@ -57,6 +57,22 @@ class App
     end
   end
 
+  def add_music_album
+    print 'Album Name : '
+    name = gets.chomp
+
+    print 'Publish date [YYYY-MM-DD] : '
+    publish_date = gets.chomp
+
+    print 'Is it on spotify? [y/n]: '
+    spotify = gets.chomp
+    spotify == 'y' ? spotify = true : spotify = false
+
+    album = MusicAlbum.new(publish_date, name, on_spotify: spotify)
+    @music_album.push(album)
+    message('New Album added successfully')
+  end
+
   def list_labels
     if is_empty(@labels)
       message('No Label in the catalog')
