@@ -5,7 +5,7 @@ require './json_data/preserve_music_albums'
 class App
   include PreserveJsonData
   include AlbumsPersistence
-  
+
   def initialize
     @books = []
     @labels = []
@@ -14,7 +14,7 @@ class App
     load_all_json_data
   end
 
-  def is_empty(array)
+  def empty(array)
     array.empty?
   end
 
@@ -69,7 +69,7 @@ class App
 
     print 'Is it on spotify? [y/n]: '
     spotify = gets.chomp
-    spotify == 'y' ? spotify = true : spotify = false
+    spotify = spotify == 'y'
 
     album = MusicAlbum.new(publish_date, name, on_spotify: spotify)
     @music_album.push(album)
@@ -137,5 +137,3 @@ class App
     @music_album = load_albums
   end
 end
-
-

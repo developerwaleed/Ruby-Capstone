@@ -16,10 +16,10 @@ describe MusicAlbum do
       expect(@music_album.on_spotify).to eq true
     end
   end
-  
+
   describe '#can_be_archived()' do
-  it 'checks if the item be archieved' do
-    expect(@music_album.can_be_archived?).to eq true
+    it 'checks if the item be archieved' do
+      expect(@music_album.can_be_archived?).to eq true
+    end
   end
-end
 end

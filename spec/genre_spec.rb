@@ -19,8 +19,8 @@ describe Genre do
 
   describe '#Add_Item()' do
     it 'checks if the item is added' do
-      @genre.add_item(MusicAlbum.new('2002-02-02','name'))
-      @genre.add_item(MusicAlbum.new('2002-02-02','name2'))
+      @genre.add_item(MusicAlbum.new('2002-02-02', 'name'))
+      @genre.add_item(MusicAlbum.new('2002-02-02', 'name2'))
       expect(@genre.items.length).to eq 2
     end
   end
