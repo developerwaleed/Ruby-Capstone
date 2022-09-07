@@ -187,5 +187,17 @@ class App
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
+
+    # Load games
+    games = load_json_data('games')
+    games.each do |game|
+      @games.push(Game.new(game['publish_date'], game['multiplayer'], game['last_played_at']))
+    end
+
+    # Load authors
+    authors = load_json_data('authors')
+    authors.each do |author|
+      @authors.push(Author.new(author['first_name'], author['last_name']))
+    end
   end
 end
