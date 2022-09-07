@@ -24,9 +24,9 @@ class App
       return
     end
     puts "\n"
-    
+
     @games.each do |game|
-      puts "publish date: #{game.publish_date}, multiplayer: #{game.multiplayer}, last_played_at: #{game.last_played_at}" 
+      puts "publish date: #{game.publish_date}, multiplayer: #{game.multiplayer}, last_played_at: #{game.last_played_at}"
     end
   end
 
@@ -38,7 +38,7 @@ class App
     puts "\n"
 
     @authors.each_with_index do |author, i|
-      puts "#{i + 1 }) #{author.first_name} #{author.last_name}"
+      puts "#{i + 1}) #{author.first_name} #{author.last_name}"
     end
   end
 
@@ -50,13 +50,13 @@ class App
     multiplayer = gets.chomp
 
     case multiplayer
-      when 'yes' 
-        multiplayer_value = 'yes'
-      when 'no'
-        multiplayer_value = 'no'
-      else
-        puts 'yes or no'
-        multiplayer_value = gets.chomp
+    when 'yes'
+      multiplayer_value = 'yes'
+    when 'no'
+      multiplayer_value = 'no'
+    else
+      puts 'yes or no'
+      multiplayer_value = gets.chomp
     end
 
     print 'Last played at[YYYY-MM-DD]: '
@@ -157,9 +157,9 @@ class App
 
     @games.each do |game|
       games.push({
-                  publish_date: game.publish_date,
-                  multiplayer: game.multiplayer,
-                  last_played_at: game.last_played_at,
+                   publish_date: game.publish_date,
+                   multiplayer: game.multiplayer,
+                   last_played_at: game.last_played_at
                  })
     end
     save_json_data(games, 'games')
@@ -167,12 +167,11 @@ class App
 
     @authors.each do |author|
       authors.push({
-                  first_name: author.first_name,
-                  last_name: author.last_name
-                 })
+                     first_name: author.first_name,
+                     last_name: author.last_name
+                   })
     end
     save_json_data(authors, 'authors')
-
   end
 
   def load_all_json_data
