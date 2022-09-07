@@ -30,3 +30,20 @@ CREATE TABLE Labels(
   title VARCHAR(100),
   color VARCHAR(100)
 )
+
+-- Create table Music_Album
+CREATE TABLE music_album(
+  ID SERIAL PRIMARY KEY,
+  publish_date DATE NOT NULL,
+  on_spotify BOOLEAN NOT NULL,
+  archived BOOLEAN NOT NULL,
+  label_ID INT REFERENCES label(ID),
+  author_ID INT REFERENCES author(ID),
+  genre_ID INT REFERENCES genre(ID)
+);
+
+-- Create table genre 
+CREATE TABLE genre(
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR(30)
+);
