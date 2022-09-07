@@ -1,5 +1,4 @@
 require_relative('../classes/genre/genre.rb')
-require_relative('../classes/item.rb')
 
 describe Genre do
   before :each do
@@ -20,7 +19,9 @@ describe Genre do
 
   describe '#Add_Item()' do
     it 'checks if the item is added' do
-      @genre.items.should eql []
+      @genre.add_item(MusicAlbum.new('2002-02-02','name'))
+      @genre.add_item(MusicAlbum.new('2002-02-02','name2'))
+      expect(@genre.items.length).to eq 2
     end
   end
 end
