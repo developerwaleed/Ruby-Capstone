@@ -132,6 +132,8 @@ class App
   def save_all_json_data
     books = []
     labels = []
+    games = []
+    authors = []
     # Save books
     @books.each do |book|
       books.push({
@@ -150,6 +152,27 @@ class App
                   })
     end
     save_json_data(labels, 'labels')
+
+    # Save games
+
+    @games.each do |game|
+      games.push({
+                  publish_date: game.publish_date,
+                  multiplayer: game.multiplayer,
+                  last_played_at: game.last_played_at,
+                 })
+    end
+    save_json_data(games, 'games')
+    # Save authors
+
+    @authors.each do |author|
+      authors.push({
+                  first_name: author.first_name,
+                  last_name: author.last_name
+                 })
+    end
+    save_json_data(authors, 'authors')
+
   end
 
   def load_all_json_data
