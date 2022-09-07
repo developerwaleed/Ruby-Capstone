@@ -1,4 +1,4 @@
-require_relative('../classes/genre/genre.rb')
+require_relative('helper_spec')
 
 describe Genre do
   before :each do

@@ -1,10 +1,12 @@
 require './spec/helper_spec'
 require './json_data/preserve_data_module'
+
 class App
   include PreserveJsonData
   def initialize
     @books = []
     @labels = []
+    @music_album = []
     load_all_json_data
   end
 
@@ -43,16 +45,16 @@ class App
     end
   end
 
-  def add_label
-    print 'Label title : '
-    title = gets.chomp
-
-    print 'Label color : '
-    color = gets.chomp
-
-    label = Label.new(title, color)
-    @labels.push(label)
-    message('New Label added successfully')
+  def list_music_albums
+    if is_empty(@music_album)
+      message('No MusicAlbum in the catalog')
+      return
+    end
+    puts "\n"
+    puts @music_album.inspect
+    @music_album.each_with_index do |album, i|
+      puts "#{i + 1}) #{album.name} || published on #{album.publish_date} || is_on_spotify? #{album.on_spotify}"
+    end
   end
 
   def list_labels

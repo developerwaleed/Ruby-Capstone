@@ -35,7 +35,7 @@ class Run
     when '2'
       app.list_labels
     when '3'
-      puts 'List all music albums'
+      app.list_music_albums
     when '4'
       puts 'List all genres'
     when '5'
@@ -43,7 +43,7 @@ class Run
     when '6'
       puts 'List all authors'
     when '7'
-      puts 'Add a music album'
+      app.add_music_album
     when '8'
       app.add_book
     when '9'
