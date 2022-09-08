@@ -39,7 +39,7 @@ class App
   end
 
   def list_books
-    if is_empty(@books)
+    if empty(@books)
       message('No books in the catalog')
       return
     end
@@ -50,7 +50,7 @@ class App
   end
 
   def list_music_albums
-    if is_empty(@music_album)
+    if empty(@music_album)
       message('No MusicAlbum in the catalog')
       return
     end
@@ -77,7 +77,7 @@ class App
   end
 
   def list_labels
-    if is_empty(@labels)
+    if empty(@labels)
       message('No Label in the catalog')
       return
     end
@@ -88,7 +88,7 @@ class App
   end
 
   def list_genres
-    if is_empty(@genres)
+    if empty(@genres)
       message('No genre in the catalog')
       return
     end
