@@ -5,6 +5,8 @@ class App
   def initialize
     @books = []
     @labels = []
+    @games = []
+    @authors = []
     load_all_json_data
   end
 
@@ -14,6 +16,67 @@ class App
 
   def message(text)
     puts "\n#{text}\n\n"
+  end
+
+  def list_games
+    if is_empty(@games)
+      message('No game in the catalog')
+      return
+    end
+    puts "\n"
+
+    @games.each do |game|
+      puts "publish date: #{game.publish_date}, multiplayer: #{game.multiplayer}, last_played_at: #{game.last_played_at}"
+    end
+  end
+
+  def list_authors
+    if is_empty(@authors)
+      message('No author in the catalog')
+      return
+    end
+    puts "\n"
+
+    @authors.each_with_index do |author, i|
+      puts "#{i + 1}) #{author.first_name} #{author.last_name}"
+    end
+  end
+
+  def add_game
+    print 'Publish date [YYYY-MM-DD] : '
+    publish_date = gets.chomp
+
+    print 'Is multiplayer game? [ yes, no ]: '
+    multiplayer = gets.chomp
+
+    case multiplayer
+    when 'yes'
+      multiplayer_value = 'yes'
+    when 'no'
+      multiplayer_value = 'no'
+    else
+      puts 'yes or no'
+      multiplayer_value = gets.chomp
+    end
+
+    print 'Last played at[YYYY-MM-DD]: '
+    last_played_at = gets.chomp
+
+    game = Game.new(publish_date, multiplayer_value, last_played_at)
+    @games.push(game)
+    message('New Game added successfully')
+  end
+
+  def add_author
+    print 'Creator\'s first name: '
+    first_name = gets.chomp
+
+    print 'Creator\'s last name: '
+    last_name = gets.chomp
+
+    author = Author.new(first_name, last_name)
+    @authors.push(author)
+    message('New Game added successfully')
   end
 
   def add_book
@@ -69,6 +132,8 @@ class App
   def save_all_json_data
     books = []
     labels = []
+    games = []
+    authors = []
     # Save books
     @books.each do |book|
       books.push({
@@ -87,6 +152,26 @@ class App
                   })
     end
     save_json_data(labels, 'labels')
+
+    # Save games
+
+    @games.each do |game|
+      games.push({
+                   publish_date: game.publish_date,
+                   multiplayer: game.multiplayer,
+                   last_played_at: game.last_played_at
+                 })
+    end
+    save_json_data(games, 'games')
+    # Save authors
+
+    @authors.each do |author|
+      authors.push({
+                     first_name: author.first_name,
+                     last_name: author.last_name
+                   })
+    end
+    save_json_data(authors, 'authors')
   end
 
   def load_all_json_data
@@ -101,7 +186,17 @@ class App
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
+
+    # Load games
+    games = load_json_data('games')
+    games.each do |game|
+      @games.push(Game.new(game['publish_date'], game['multiplayer'], game['last_played_at']))
+    end
+
+    # Load authors
+    authors = load_json_data('authors')
+    authors.each do |author|
+      @authors.push(Author.new(author['first_name'], author['last_name']))
+    end
   end
 end
-
-
