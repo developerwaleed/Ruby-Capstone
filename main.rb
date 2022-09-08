@@ -36,15 +36,15 @@ class Run
     when '2'
       app.list_labels
     when '3'
-      puts 'List all music albums'
+      app.list_music_albums
     when '4'
-      puts 'List all genres'
+      app.list_genres
     when '5'
       app.list_games
     when '6'
       app.list_authors
     when '7'
-      puts 'Add a music album'
+      app.add_music_album
     when '8'
       app.add_book
     when '9'

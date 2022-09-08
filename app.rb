@@ -1,16 +1,22 @@
 require './spec/helper_spec'
 require './json_data/preserve_data_module'
+require './json_data/preserve_music_albums'
+
 class App
   include PreserveJsonData
+  include AlbumsPersistence
+
   def initialize
     @books = []
     @labels = []
+    @music_album = []
+    @genres = []
     @games = []
     @authors = []
     load_all_json_data
   end
 
-  def is_empty(array)
+  def empty(array)
     array.empty?
   end
 
@@ -19,7 +25,7 @@ class App
   end
 
   def list_games
-    if is_empty(@games)
+    if empty(@games)
       message('No game in the catalog')
       return
     end
@@ -31,7 +37,7 @@ class App
   end
 
   def list_authors
-    if is_empty(@authors)
+    if empty(@authors)
       message('No author in the catalog')
       return
     end
@@ -40,6 +46,18 @@ class App
     @authors.each_with_index do |author, i|
       puts "#{i + 1}) #{author.first_name} #{author.last_name}"
     end
+  end
+
+  def add_label
+    print 'Label title : '
+    title = gets.chomp
+
+    print 'Label color : '
+    color = gets.chomp
+
+    label = Label.new(title, color)
+    @labels.push(label)
+    message('New Label added successfully')
   end
 
   def add_game
@@ -96,7 +114,7 @@ class App
   end
 
   def list_books
-    if is_empty(@books)
+    if empty(@books)
       message('No books in the catalog')
       return
     end
@@ -106,26 +124,52 @@ class App
     end
   end
 
-  def add_label
-    print 'Label title : '
-    title = gets.chomp
+  def list_music_albums
+    if empty(@music_album)
+      message('No MusicAlbum in the catalog')
+      return
+    end
+    puts "\n"
+    @music_album.each_with_index do |album, i|
+      puts "#{i + 1}) #{album.name} || published on #{album.publish_date} || is_on_spotify? #{album.on_spotify}"
+    end
+  end
 
-    print 'Label color : '
-    color = gets.chomp
+  def add_music_album
+    print 'Album Name : '
+    name = gets.chomp
 
-    label = Label.new(title, color)
-    @labels.push(label)
-    message('New Label added successfully')
+    print 'Publish date [YYYY-MM-DD] : '
+    publish_date = gets.chomp
+
+    print 'Is it on spotify? [y/n]: '
+    spotify = gets.chomp
+    spotify = spotify == 'y'
+
+    album = MusicAlbum.new(publish_date, name, on_spotify: spotify)
+    @music_album.push(album)
+    message('New Album added successfully')
   end
 
   def list_labels
-    if is_empty(@labels)
+    if empty(@labels)
       message('No Label in the catalog')
       return
     end
     puts "\n"
     @labels.each do |label|
       puts "[Id:#{label.id}] '#{label.title}' => #{label.color}"
+    end
+  end
+
+  def list_genres
+    if empty(@genres)
+      message('No genre in the catalog')
+      return
+    end
+    puts "\n"
+    @genres.each do |genre|
+      puts "ID: #{genre.id} | Name: #{genre.name}"
     end
   end
 
@@ -152,6 +196,7 @@ class App
                   })
     end
     save_json_data(labels, 'labels')
+    store_albums(@music_album)
 
     # Save games
 
@@ -186,6 +231,7 @@ class App
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
+    @music_album = load_albums
 
     # Load games
     games = load_json_data('games')
