@@ -17,5 +17,12 @@ describe Author do
     it 'should return last-name' do
       expect(@zabuza.last_name).to eq('Danzo')
     end
+
+      it 'Should return the number of items in the label' do
+        @zabuza.add_item(Game.new('2011-12-21', 'yes', '2019-12-25'))
+        @zabuza.add_item(Game.new('2011-12-21', 'yes', '2019-12-25'))
+        @zabuza.add_item(Game.new('2011-12-21', 'yes', '2019-12-25'))
+        expect(@zabuza.items.length).to eq(3)
+      end
   end
 end
