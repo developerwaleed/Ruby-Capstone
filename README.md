@@ -72,7 +72,6 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - To Microvese
-- FreeCodecamp tutorials
 
 ## 📝 License
 
