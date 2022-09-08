@@ -13,7 +13,7 @@ module PreserveJsonData
     if File.empty?("./json_data/#{json_file}.json")
       puts 'No data in the catalog'
     else
-      fetched_data = JSON.parse(File.read("./json_data/#{json_file}.json"))
+      JSON.parse(File.read("./json_data/#{json_file}.json"))
 
     end
   end
