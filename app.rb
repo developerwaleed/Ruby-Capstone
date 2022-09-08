@@ -48,6 +48,18 @@ class App
     end
   end
 
+  def add_label
+    print 'Label title : '
+    title = gets.chomp
+
+    print 'Label color : '
+    color = gets.chomp
+
+    label = Label.new(title, color)
+    @labels.push(label)
+    message('New Label added successfully')
+  end
+
   def add_game
     print 'Publish date [YYYY-MM-DD] : '
     publish_date = gets.chomp
